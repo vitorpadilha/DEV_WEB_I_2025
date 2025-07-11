@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="cep" >
+    <div id="endereco"></div>
+    <script>
+        const cepIpt = document.querySelector("#cep")
+        function carregaEndereco(){
+            if(this.readyState == 4 && this.status == 200) {
+                const resposta = JSON.parse(this.responseText)
+                console.log("Resposta está pronta e está ok")
+                console.log(resposta);
+                //carregando a resposta no DOM
+                const enderecoDiv = document.querySelector("#endereco")
+                enderecoDiv.innerHTML = resposta       
+            }
+        }
+        cepIpt.addEventListener("change", () => {
+            let cepDesejado = cepIpt.value
+            let url = `https://rafaelescalfoni.github.io/desenv_web/filmes.json`
+            //criar o objeto XMLHTTPRequest
+            const objetoHTTPRequest = new XMLHttpRequest()
+            //Configurar a requisição
+            objetoHTTPRequest.open("GET", url)
+            //Enviar a requisição
+            objetoHTTPRequest.send()
+            //Esperar a resposta ficar pronta
+            objetoHTTPRequest.onreadystatechange = carregaEndereco
+            
+        })  
+    </script>
+</body>
+</html>
