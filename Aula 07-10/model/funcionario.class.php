@@ -1,4 +1,5 @@
 <?php
+    include("class_pai.class.php");
     class Funcionario extends ClassePai {
         public $nome;
         public $telefone;
