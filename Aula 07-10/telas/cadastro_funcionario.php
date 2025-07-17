@@ -7,7 +7,9 @@
     <script src="cadastro_funcionario.js"></script>
 </head>
 <body>
-    <form id="formCadastroFuncionario" >
+    <form id="formCadastroFuncionario" action="executa_acao_funcionario.php">
+        <input type="hidden" name="acao" value="cadastrar"/>
+        <input type="hidden" name="id" value="<?php echo $_GET["id"]?$_GET["id"]:"" ?>"/>
         <label for="nome">Nome:</label><input type="text" id="nome" name="name"/><br/>
         <label for="salario">Salario:</label><input type="text" id="salario" name="salario"/>
         <label for="telefone">Telefone:</label><input type="tel" id="telefone" name="telefone"/>
