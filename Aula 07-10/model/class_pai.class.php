@@ -32,7 +32,6 @@
         public function remover() {
             //TODO: Remover funcionário do arquivo.
         }
-        static abstract function listar();
         public function alterar() {
             //TODO: Alterar linha do funcionário funcionário no arquivo.
         }

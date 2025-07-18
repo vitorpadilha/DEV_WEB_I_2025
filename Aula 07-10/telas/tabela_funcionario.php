@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="post">
+        <label>Nome:</label><input name="filtro"/>
+        <button>Filtrar</button>
+    </form>
     <?php
     include("../service/funcionario.service.php");
-    listarFuncionario("");
+    $filtro = isset($_POST["filtro"])?$_POST["filtro"]:"";
+    listarFuncionario($filtro);
     ?>
 </body>
 </html>
