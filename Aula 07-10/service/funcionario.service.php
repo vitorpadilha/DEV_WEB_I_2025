@@ -15,6 +15,8 @@
     }
 
     function listar($filtroNome) {
+        
+       Funcionario::listar();
 
     }
 

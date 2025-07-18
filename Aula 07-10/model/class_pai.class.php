@@ -3,10 +3,9 @@
     abstract class ClassePai {
         public $id;
         private $nomeArquivo="";
-        protected $separador = "#";
-        public function __construct($id, $nomeArquivo) {
+        const SEPARADOR = "#";
+        public function __construct($id) {
             $this->id = $id;
-            $this->nomeArquivo = "../db/".$nomeArquivo;
         }
         abstract function montaLinhaDados();
 
@@ -17,7 +16,7 @@
                 $linha = fgets($arquivo);
                 if(empty($linha))
                     continue;
-                $dados = explode($this->separador, $linha);
+                $dados = explode(self::SEPARADOR, $linha);
                 $idTemp = intval($dados[0])+1;
             }
             $this->id=$idTemp;
@@ -32,8 +31,19 @@
         public function remover() {
             //TODO: Remover funcionário do arquivo.
         }
-        public function listar() {
-            //TODO: Listar funcionários do arquivo.
+        static abstract public function transformaEmObjeto($arrayDeDados);
+        static abstract public function retornoNomeArquivo();
+        static public function listar() {
+            $arquivo = fopen(self::retornoNomeArquivo(), "r");
+            $retorno = [];
+            while(!feof($arquivo)){
+                $linha = fgets($arquivo);
+                if(empty($linha))
+                    continue;
+                $dados = explode(self::SEPARADOR, $linha);
+                array_push($retorno, self::transformaEmObjeto($dados));
+            }
+            return $retorno;
         }
         public function alterar() {
             //TODO: Alterar linha do funcionário funcionário no arquivo.
