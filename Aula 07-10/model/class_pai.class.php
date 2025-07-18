@@ -4,8 +4,9 @@
         public $id;
         private $nomeArquivo="";
         const SEPARADOR = "#";
-        public function __construct($id) {
+        public function __construct($id, $nomeArquivo) {
             $this->id = $id;
+            $this->nomeArquivo = $nomeArquivo;
         }
         abstract function montaLinhaDados();
 
@@ -31,20 +32,7 @@
         public function remover() {
             //TODO: Remover funcionário do arquivo.
         }
-        static abstract public function transformaEmObjeto($arrayDeDados);
-        static abstract public function retornoNomeArquivo();
-        static public function listar() {
-            $arquivo = fopen(self::retornoNomeArquivo(), "r");
-            $retorno = [];
-            while(!feof($arquivo)){
-                $linha = fgets($arquivo);
-                if(empty($linha))
-                    continue;
-                $dados = explode(self::SEPARADOR, $linha);
-                array_push($retorno, self::transformaEmObjeto($dados));
-            }
-            return $retorno;
-        }
+        static abstract function listar();
         public function alterar() {
             //TODO: Alterar linha do funcionário funcionário no arquivo.
         }
