@@ -5,7 +5,7 @@
 
         function montaLinhaDados()
         {
-            return $this->id.$this->separador.$this->nome.$this->separador.$this->preco;
+            return $this->id.self::SEPARADOR.$this->nome.self::SEPARADOR.$this->preco;
         }
     }
 
