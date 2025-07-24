@@ -15,7 +15,7 @@
     }
 
     function listarFuncionario($filtroNome) {
-        $funcionarios = Funcionario::listar();
+        $funcionarios = Funcionario::listar($filtroNome);
         echo "<table><thead><tr><th>Nome</th><th>Salário</th><th>Telefone</th></tr></thead><tbody>";
         foreach($funcionarios as $funcionario) {
             echo "<tr><td>".$funcionario->nome."</td>";
