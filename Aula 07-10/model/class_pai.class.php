@@ -4,6 +4,7 @@
         public $id;
         private $nomeArquivo="";
         const SEPARADOR = "#";
+        const NOME_ARQUIVO = " ";
         public function __construct($id, $nomeArquivo) {
             $this->id = $id;
             $this->nomeArquivo = $nomeArquivo;
@@ -22,6 +23,19 @@
             }
             $this->id=$idTemp;
         }
+
+        static public function pegaPorId($id) {
+            $arquivo = fopen(self::NOME_ARQUIVO, "r");
+            while(!feof($arquivo)){
+                $linha = fgets($arquivo);
+                if(empty($linha))
+                    continue;
+                $dados = explode(self::SEPARADOR, $linha);
+                if($dados[0] == $id){
+                    return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
+                }
+            }
+        }
         public function cadastrar() {
             $this->encontraUltimoId();
             //TODO: Cadastrar  no arquivo.
@@ -34,6 +48,7 @@
         }
         public function alterar() {
             //TODO: Alterar linha do funcionário funcionário no arquivo.
+            
         }
     }
 

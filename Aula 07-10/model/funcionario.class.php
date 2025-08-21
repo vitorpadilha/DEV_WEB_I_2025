@@ -4,7 +4,7 @@
         public $nome;
         public $telefone;
         public $salario;
-
+        const NOME_ARQUIVO = "../db/funcionario.txt";
         public function __construct($id, $nome, $salario, $telefone) {
             parent::__construct($id, "../db/funcionario.txt");
             $this->nome = $nome;
@@ -32,17 +32,6 @@
             return $retorno;
         }
 
-        static public function pegaPorId($id) {
-            $arquivo = fopen("../db/funcionario.txt", "r");
-            while(!feof($arquivo)){
-                $linha = fgets($arquivo);
-                if(empty($linha))
-                    continue;
-                $dados = explode(self::SEPARADOR, $linha);
-                if($dados[0] == $id){
-                    return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
-                }
-            }
-        }
+        
     }
 ?>
