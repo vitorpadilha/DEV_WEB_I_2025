@@ -22,19 +22,22 @@
                 $idTemp = intval($dados[0])+1;
             }
             $this->id=$idTemp;
+            fclose($arquivo);
         }
 
         static public function pegaPorId($id) {
-            $arquivo = fopen(self::NOME_ARQUIVO, "r");
+            $arquivo = fopen("../../db/funcionario.txt", "r");
             while(!feof($arquivo)){
                 $linha = fgets($arquivo);
                 if(empty($linha))
                     continue;
                 $dados = explode(self::SEPARADOR, $linha);
                 if($dados[0] == $id){
+                    fclose($arquivo);
                     return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
                 }
             }
+            fclose($arquivo);
         }
         public function cadastrar() {
             $this->encontraUltimoId();
@@ -44,11 +47,53 @@
             fclose($arquivo);
         }
         public function remover() {
-            //TODO: Remover funcionário do arquivo.
+            $arquivo = fopen($this->nomeArquivo, "r+");
+            $auxiliar = "";
+            while(!feof($arquivo)){
+                $linha = fgets($arquivo);
+                var_dump($linha);
+                if(empty($linha))
+                    continue;
+                $dados = explode(self::SEPARADOR, $linha);
+                
+                if($dados[0] != $this->id){
+                    $auxiliar .= $linha."\n";
+                }
+            }
+            if(!empty($auxiliar)){
+                ftruncate($arquivo, 0);
+                rewind($arquivo);
+                fwrite($arquivo, $auxiliar);
+            }
+            
+            fclose($arquivo);
+        
         }
         public function alterar() {
-            //TODO: Alterar linha do funcionário funcionário no arquivo.
+            $arquivo = fopen($this->nomeArquivo, "r+");
+            $auxiliar = "";
+            while(!feof($arquivo)){
+                $linha = fgets($arquivo);
+                var_dump($linha);
+                if(empty($linha))
+                    continue;
+                $dados = explode(self::SEPARADOR, $linha);
+
+                
+                if($dados[0] == $this->id){
+                    $auxiliar .= $this->montaLinhaDados()."\n";
+                }
+                else {
+                    $auxiliar .= $linha."\n";
+                }
+            }
+            if(!empty($auxiliar)){
+                ftruncate($arquivo, 0);
+                rewind($arquivo);
+                fwrite($arquivo, $auxiliar);
+            }
             
+            fclose($arquivo);
         }
     }
 

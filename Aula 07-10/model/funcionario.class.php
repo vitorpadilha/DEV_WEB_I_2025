@@ -4,9 +4,9 @@
         public $nome;
         public $telefone;
         public $salario;
-        const NOME_ARQUIVO = "../db/funcionario.txt";
+        const NOME_ARQUIVO = "../../db/funcionario.txt";
         public function __construct($id, $nome, $salario, $telefone) {
-            parent::__construct($id, "../db/funcionario.txt");
+            parent::__construct($id, "../../db/funcionario.txt");
             $this->nome = $nome;
             $this->salario = $salario;
             $this->telefone = $telefone;
@@ -17,7 +17,7 @@
             return $this->id.self::SEPARADOR.$this->nome.self::SEPARADOR.$this->salario.self::SEPARADOR.$this->telefone;
         }    
         static public function listar($filtroNome) {
-            $arquivo = fopen("../db/funcionario.txt", "r");
+            $arquivo = fopen("../../db/funcionario.txt", "r");
             $retorno = [];
             while(!feof($arquivo)){
                 $linha = fgets($arquivo);
