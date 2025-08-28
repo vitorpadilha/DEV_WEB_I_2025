@@ -57,7 +57,7 @@
                 $dados = explode(self::SEPARADOR, $linha);
                 
                 if($dados[0] != $this->id){
-                    $auxiliar .= $linha."\n";
+                    $auxiliar .= $linha;
                 }
             }
             if(!empty($auxiliar)){
@@ -84,7 +84,7 @@
                     $auxiliar .= $this->montaLinhaDados()."\n";
                 }
                 else {
-                    $auxiliar .= $linha."\n";
+                    $auxiliar .= $linha;
                 }
             }
             if(!empty($auxiliar)){

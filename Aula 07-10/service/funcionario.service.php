@@ -43,4 +43,9 @@
 
     }
 
+
+    function listarTodosFuncionarios() {
+        return Funcionario::listar("");
+    }
+
 ?>
