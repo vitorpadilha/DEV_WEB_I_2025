@@ -1,4 +1,8 @@
 <?php
+    include_once("class_pai.class.php");
+    include_once("cliente.class.php");
+    include_once("funcionario.class.php");
+    include_once("produto.class.php");
     class Venda extends ClassePai {
         public $cliente;
         public $vendedor;//tipo Funcionario
@@ -38,6 +42,7 @@
                 $dados = explode(self::SEPARADOR, $linha);
                 if($dados[0] == $id){
                     fclose($arquivo);
+                    //PEGA OS IDS DOS PRODUTOS
                     $idsProdutos = array_slice($dados, 4, count($dados));
                     return new Venda($dados[0], Cliente::pegaPorId($dados[1]), Funcionario::pegaPorId($dados[2]), Produto::pegaPorIds($idsProdutos), $dados[3]);
                 }
