@@ -25,20 +25,7 @@
             fclose($arquivo);
         }
 
-        static public function pegaPorId($id) {
-            $arquivo = fopen("../../db/funcionario.txt", "r");
-            while(!feof($arquivo)){
-                $linha = fgets($arquivo);
-                if(empty($linha))
-                    continue;
-                $dados = explode(self::SEPARADOR, $linha);
-                if($dados[0] == $id){
-                    fclose($arquivo);
-                    return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
-                }
-            }
-            fclose($arquivo);
-        }
+        
         public function cadastrar() {
             $this->encontraUltimoId();
             //TODO: Cadastrar  no arquivo.
