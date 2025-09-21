@@ -1,0 +1,8 @@
+{
+ "clientes":[
+    {"nome": "José", "id": 2, "nascimento": "Bom Jardim"},
+    {"nome": "João", "id": 3, "nascimento": "Miracema"},
+    {"nome": "Alberto", "id": 4, "nascimento": "Nova Friburgo"}
+ ],
+ "produtos": []
+}
