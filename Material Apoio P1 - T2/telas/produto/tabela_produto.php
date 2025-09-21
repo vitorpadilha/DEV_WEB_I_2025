@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Clientes</title>
+    <title>Lista de Produtos</title>
 </head>
 <body>
     <form method="post">
@@ -11,9 +11,9 @@
         <button>Filtrar</button>
     </form>
     <?php
-    include("../../service/cliente.service.php");
+    include("../../service/produto.service.php");
     $filtro = isset($_POST["filtro"])?$_POST["filtro"]:"";
-    listarCliente($filtro);
+    listarProduto($filtro);
     ?>
 </body>
 </html>
