@@ -1,20 +1,20 @@
 <?
-  include("../../service/cliente.service.php");
+  include("../../service/produto.service.php");
   $acao = $_POST['acao'];
   $nome = isset($_POST['nome'])?$_POST['nome']:null;
-  $email = isset($_POST['email'])?$_POST['email']:null;
-  $telefone = isset($_POST['telefone'])?$_POST['telefone']:null;
+  $fabricante = isset($_POST['fabricante'])?$_POST['fabricante']:null;
+  $preco = isset($_POST['preco'])?$_POST['preco']:null;
   $id = isset($_POST['id'])?$_POST['id']:null;
   if($acao=="cadastrar") {
-    cadastrarCliente($nome, $email, $telefone);
+    cadastrarProduto($nome, $fabricante, $preco);
     echo "Cadastrado com sucesso";
   }
   else if($acao=="alterar") {
-    alterarCliente($id, $nome, $email, $telefone);
+    alterarProduto($id, $nome, $fabricante, $preco);
     echo "Alterado com sucesso";
   }
   else if($acao=="remover") {
-    removerCliente($id);
+    removerProduto($id);
     echo "Removido com sucesso";
   }
   else {
