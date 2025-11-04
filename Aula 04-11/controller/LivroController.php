@@ -1,6 +1,6 @@
 <?php
-require_once("./GenericController.php");
-require_once("../model/livro.class.php");
+  require_once __DIR__ . "/GenericController.php";
+require_once __DIR__ . "/../model/livro.class.php";
 class LivroController implements GenericController{
     
     function cadastrar($dadosRecebidos){

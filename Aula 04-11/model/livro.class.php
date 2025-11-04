@@ -1,5 +1,5 @@
 <?php
-require_once("./classe_pai.php");
+require_once __DIR__ . "/classe_pai.php";
 class Livro extends ClassePai {
 
     public $titulo;
@@ -11,7 +11,7 @@ class Livro extends ClassePai {
     public $ISSN;
 
     public function __construct($id, $titulo, $autor, $editora, $anoPublicacao, $genero, $localizacao, $ISSN) {
-        parent::__construct($id);
+        parent::__construct($id, "database/livros.txt");
         $this->titulo = $titulo;
         $this->autor = $autor;
         $this->editora = $editora;
@@ -26,6 +26,11 @@ class Livro extends ClassePai {
         array_push($listaLivros, new Livro(1, "1984", "George Orwell", "Companhia das Letras", 1949, "Distopia", "A1", "1234-5678"));
         array_push($listaLivros, new Livro(2, "O Senhor dos Anéis", "J.R.R. Tolkien", "HarperCollins", 1954, "Fantasia", "B2", "2345-6789"));
         return $listaLivros;    
+    }
+
+    function montaLinhaDados()
+    {
+        return $this->id.self::SEPARADOR.$this->titulo.self::SEPARADOR.$this->autor.self::SEPARADOR.$this->editora.self::SEPARADOR.$this->anoPublicacao.self::SEPARADOR.$this->genero.self::SEPARADOR.$this->localizacao.self::SEPARADOR.$this->ISSN;
     }
 }
 ?>

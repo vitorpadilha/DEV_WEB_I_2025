@@ -1,7 +1,7 @@
 <?php
-  require_once("./Controller/GenericController.php");
-  require_once("./Controller/LivroController.php");
-  require_once("./Controller/UsuarioController.php");
+  require_once __DIR__ . "/controller/GenericController.php";
+  require_once __DIR__ . "/controller/LivroController.php";
+  require_once __DIR__ . "/controller/UsuarioController.php";
   $metodo = $_SERVER['REQUEST_METHOD'];
   $modulo = $_GET['modulo'];
   $controller = null;

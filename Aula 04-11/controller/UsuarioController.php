@@ -1,5 +1,5 @@
 <?php
-require_once("./GenericController.php");
+require_once __DIR__ . "/GenericController.php";
 class UsuarioController implements GenericController{
     
     function cadastrar($dadosRecebidos){
