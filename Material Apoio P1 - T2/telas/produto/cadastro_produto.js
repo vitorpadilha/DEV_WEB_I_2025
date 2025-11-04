@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", 
     (ev)=>{     
-        let formCad = document.getElementById("formCadastroCliente");
+        let formCad = document.getElementById("formCadastroProduto");
 
         formCad.addEventListener("submit", (ev2)=>{
             ev2.preventDefault();
