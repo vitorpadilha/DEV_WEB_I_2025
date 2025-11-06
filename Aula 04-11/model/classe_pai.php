@@ -24,20 +24,7 @@
         fclose($arquivo);
     }
 
-    static public function pegaPorId($id) {
-        $arquivo = fopen($this->nomeArquivo, "r");
-        while(!feof($arquivo)){
-            $linha = fgets($arquivo);
-            if(empty($linha))
-                continue;
-            $dados = explode(self::SEPARADOR, $linha);
-            if($dados[0] == $id){
-                fclose($arquivo);
-                return toEntity($dados);
-            }
-        }
-        fclose($arquivo);
-    }
+
 
     
     public function cadastrar() {
