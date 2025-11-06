@@ -16,34 +16,24 @@ class LivroController implements GenericController{
         );
         $livro->cadastrar();
     }
+
     function listar($dadosRecebidos){
         return Livro::listar($dadosRecebidos);
     }
     function alterar($dadosRecebidos){
-        $livro = new Livro(
-            $dadosRecebidos->id,
-            $dadosRecebidos->titulo,
-            $dadosRecebidos->autor,
-            $dadosRecebidos->editora,
-            $dadosRecebidos->anoPublicacao,
-            $dadosRecebidos->genero,
-            $dadosRecebidos->localizacao,
-            $dadosRecebidos->ISSN
-        );
+        $livro = LivroController::pegaPorId($dadosRecebidos->id);
+        $livro->titulo = $dadosRecebidos["titulo"];
+        $livro->autor = $dadosRecebidos["autor"];
+        $livro->editora = $dadosRecebidos["editora"];
+        $livro->anoPublicacao = $dadosRecebidos["anoPublicacao"];
+        $livro->genero = $dadosRecebidos["genero"];
+        $livro->localizacao = $dadosRecebidos["localizacao"];
+        $livro->ISSN = $dadosRecebidos["ISSN"];
         $livro->alterar();
     }
     function remover($dadosRecebidos){
-        $livro = new Livro(
-            $dadosRecebidos->id,
-            $dadosRecebidos->titulo,
-            $dadosRecebidos->autor,
-            $dadosRecebidos->editora,
-            $dadosRecebidos->anoPublicacao,
-            $dadosRecebidos->genero,
-            $dadosRecebidos->localizacao,
-            $dadosRecebidos->ISSN
-        );
-        $livro->remover();
+       $livro = LivroController::pegaPorId($dadosRecebidos->id);
+       $livro->remover();
     }
 }
 

@@ -24,7 +24,7 @@
         fclose($arquivo);
     }
 
-        static public function pegaPorId($id) {
+    static public function pegaPorId($id) {
         $arquivo = fopen($this->nomeArquivo, "r");
         while(!feof($arquivo)){
             $linha = fgets($arquivo);
@@ -33,7 +33,7 @@
             $dados = explode(self::SEPARADOR, $linha);
             if($dados[0] == $id){
                 fclose($arquivo);
-                return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
+                return toEntity($dados);
             }
         }
         fclose($arquivo);
