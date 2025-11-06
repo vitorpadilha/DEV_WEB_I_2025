@@ -9,7 +9,7 @@
         $this->nomeArquivo = $nomeArquivo;
     }
     abstract function montaLinhaDados();
-
+    abstract function toEntity($dados);
     public function encontraUltimoId(){
         $arquivo = fopen($this->nomeArquivo, "r");
         $idTemp = 1;
@@ -21,6 +21,21 @@
             $idTemp = intval($dados[0])+1;
         }
         $this->id=$idTemp;
+        fclose($arquivo);
+    }
+
+        static public function pegaPorId($id) {
+        $arquivo = fopen($this->nomeArquivo, "r");
+        while(!feof($arquivo)){
+            $linha = fgets($arquivo);
+            if(empty($linha))
+                continue;
+            $dados = explode(self::SEPARADOR, $linha);
+            if($dados[0] == $id){
+                fclose($arquivo);
+                return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
+            }
+        }
         fclose($arquivo);
     }
 
