@@ -9,9 +9,22 @@ class Livro extends ClassePai {
     public $genero;
     public $localizacao;
     public $ISSN;
-
+    static public function pegaPorId($id) {
+        $arquivo = fopen("../../database/livros.txt", "r");
+        while(!feof($arquivo)){
+            $linha = fgets($arquivo);
+            if(empty($linha))
+                continue;
+            $dados = explode(self::SEPARADOR, $linha);
+            if($dados[0] == $id){
+                fclose($arquivo);
+                return new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]);
+            }
+        }
+        fclose($arquivo);
+    }
     public function __construct($id, $titulo, $autor, $editora, $anoPublicacao, $genero, $localizacao, $ISSN) {
-        parent::__construct($id, "database/livros.txt");
+        parent::__construct($id, "../../database/livros.txt");
         $this->titulo = $titulo;
         $this->autor = $autor;
         $this->editora = $editora;
@@ -21,11 +34,20 @@ class Livro extends ClassePai {
         $this->ISSN = $ISSN;
     }
 
-    static public function listar($filtros=[]) {
-        $listaLivros = [];
-        array_push($listaLivros, new Livro(1, "1984", "George Orwell", "Companhia das Letras", 1949, "Distopia", "A1", "1234-5678"));
-        array_push($listaLivros, new Livro(2, "O Senhor dos Anéis", "J.R.R. Tolkien", "HarperCollins", 1954, "Fantasia", "B2", "2345-6789"));
-        return $listaLivros;    
+    static public function listar($filtroNome) {
+            $arquivo = fopen("../../database/livros.txt", "r");
+            $retorno = [];
+            while(!feof($arquivo)){
+                $linha = fgets($arquivo);
+                if(empty($linha))
+                    continue;
+                $dados = explode(self::SEPARADOR, $linha);
+                if(str_contains($dados[1], $filtroNome)){
+                    array_push($retorno, new Funcionario($dados[0], $dados[1], $dados[2], $dados[3]));
+                }
+                
+            }
+            return $retorno;
     }
 
     function montaLinhaDados()
