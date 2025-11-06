@@ -23,6 +23,21 @@ class Livro extends ClassePai {
         );
     }
 
+    static public function pegaPorId($id) {
+        $arquivo = fopen("database/livros.txt", "r");
+        while(!feof($arquivo)){
+            $linha = fgets($arquivo);
+            if(empty($linha))
+                continue;
+            $dados = explode(self::SEPARADOR, $linha);
+            if($dados[0] == $id){
+                fclose($arquivo);
+                return $this->toEntity($dados);
+            }
+        }
+        fclose($arquivo);
+    }
+
     public function __construct($id, $titulo, $autor, $editora, $anoPublicacao, $genero, $localizacao, $ISSN) {
         parent::__construct($id, "database/livros.txt");
         $this->titulo = $titulo;
@@ -43,16 +58,7 @@ class Livro extends ClassePai {
                     continue;
                 $dados = explode(self::SEPARADOR, $linha);
                 if(str_contains($dados[1], $filtroNome)){
-                    array_push($retorno, new Livro(
-            $dados[0],
-            $dados[1],
-            $dados[2],
-            $dados[3],
-            $dados[4],
-            $dados[5],
-            $dados[6],
-            $dados[7]
-        ));
+                    array_push($retorno,$this->toEntity($dados));
                 }
                 
             }
