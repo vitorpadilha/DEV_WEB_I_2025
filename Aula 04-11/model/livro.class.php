@@ -24,7 +24,7 @@ class Livro extends ClassePai {
     }
 
     public function __construct($id, $titulo, $autor, $editora, $anoPublicacao, $genero, $localizacao, $ISSN) {
-        parent::__construct($id, "../../database/livros.txt");
+        parent::__construct($id, "database/livros.txt");
         $this->titulo = $titulo;
         $this->autor = $autor;
         $this->editora = $editora;
@@ -35,7 +35,7 @@ class Livro extends ClassePai {
     }
 
     static public function listar($filtroNome) {
-            $arquivo = fopen("../../database/livros.txt", "r");
+            $arquivo = fopen("database/livros.txt", "r");
             $retorno = [];
             while(!feof($arquivo)){
                 $linha = fgets($arquivo);
