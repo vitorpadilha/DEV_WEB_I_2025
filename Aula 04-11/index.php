@@ -3,16 +3,16 @@
   require_once __DIR__ . "/controller/LivroController.php";
   require_once __DIR__ . "/controller/UsuarioController.php";
   $metodo = $_SERVER['REQUEST_METHOD'];
-  $modulo = $_GET['modulo'];
+  $modulo = @$_GET['modulo'];
   $controller = null;
   $mysqli = new mysqli("localhost", "root", "", "biblioteca");
   // localhost/index.php?modulo=livro
   switch($modulo) {
     case "usuario":
-        $controller = new UsuarioController();
+        $controller = new UsuarioController($mysqli);
         break;
     case "livro":
-        $controller = new LivroController();
+        $controller = new LivroController($mysqli);
         break;
     default: 
         return json_encode("{erro: true, mensagem: 'Módulo Inválido'}");
