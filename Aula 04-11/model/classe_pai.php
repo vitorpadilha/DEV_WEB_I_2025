@@ -27,14 +27,14 @@
 
 
     
-    public function cadastrar() {
+    public function cadastrar($conn) {
         $this->encontraUltimoId();
         //TODO: Cadastrar  no arquivo.
         $arquivo = fopen($this->nomeArquivo, "a");
         fwrite($arquivo, $this->montaLinhaDados()."\n");
         fclose($arquivo);
     }
-    public function remover() {
+    public function remover($conn) {
         $arquivo = fopen($this->nomeArquivo, "r+");
         $auxiliar = "";
         while(!feof($arquivo)){
@@ -57,7 +57,7 @@
         fclose($arquivo);
     
     }
-    public function alterar() {
+    public function alterar($conn) {
         $arquivo = fopen($this->nomeArquivo, "r+");
         $auxiliar = "";
         while(!feof($arquivo)){
