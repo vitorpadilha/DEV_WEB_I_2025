@@ -24,7 +24,7 @@ class LivroController implements GenericController{
         return Livro::listar($dadosRecebidos, $this->conn);
     }
     function alterar($dadosRecebidos){
-        $livro = LivroController::pegaPorId($dadosRecebidos->id, $this->conn);
+        $livro = Livro::pegaPorId($dadosRecebidos->id, $this->conn);
         $livro->titulo = $dadosRecebidos["titulo"];
         $livro->autor = $dadosRecebidos["autor"];
         $livro->editora = $dadosRecebidos["editora"];
@@ -35,9 +35,9 @@ class LivroController implements GenericController{
         $livro->alterar($this->conn);
     }
     function remover($dadosRecebidos){
-       $livro = LivroController::pegaPorId($dadosRecebidos->id, $this->conn);
+       $livro = Livro::pegaPorId($dadosRecebidos->id, $this->conn);
        $livro->remover($this->conn);
     }
 }
 
-?>
+?>:
