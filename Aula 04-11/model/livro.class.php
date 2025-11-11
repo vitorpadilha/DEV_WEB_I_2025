@@ -23,8 +23,52 @@ class Livro extends ClassePai {
         );
     }
 
+    public function cadastrar(){
+        $SQL = "INSERT INTO livros (titulo, autor, editora, anoPublicacao, genero, localizacao, ISSN) VALUES (
+            '$this->titulo',
+            '$this->autor',
+            '$this->editora',
+            '$this->anoPublicacao',
+            '$this->genero',
+            '$this->localizacao',
+            '$this->ISSN'
+        )";
+        $resultado = mysql_query($SQL);
+        if($resultado){
+            $this->id = mysql_insert_id();
+        }
+    }
+
+    public function alterar(){
+        $SQL = "UPDATE livros SET 
+            titulo = '$this->titulo',
+            autor = '$this->autor',
+            editora = '$this->editora',
+            anoPublicacao = '$this->anoPublicacao',
+            genero = '$this->genero',
+            localizacao = '$this->localizacao',
+            ISSN = '$this->ISSN'
+        WHERE id = $this->id";
+        mysql_query($SQL);
+    }
     static public function pegaPorId($id) {
-        $arquivo = fopen("database/livros.txt", "r");
+        $SQL = "SELECT * FROM livros WHERE id = $id";
+        $resultado = mysql_query($SQL);
+        if($resultado){
+            $dados = mysql_fetch_array($resultado);
+            return new Livro(
+                $dados['id'],
+                $dados['titulo'],
+                $dados['autor'],
+                $dados['editora'],
+                $dados['anoPublicacao'],
+                $dados['genero'],
+                $dados['localizacao'],
+                $dados['ISSN']
+            );
+        }
+        /*$arquivo = fopen("database/livros.txt"
+        , "r");
         while(!feof($arquivo)){
             $linha = fgets($arquivo);
             if(empty($linha))
@@ -35,7 +79,7 @@ class Livro extends ClassePai {
                 return $this->toEntity($dados);
             }
         }
-        fclose($arquivo);
+        fclose($arquivo);*/
     }
 
     public function __construct($id, $titulo, $autor, $editora, $anoPublicacao, $genero, $localizacao, $ISSN) {

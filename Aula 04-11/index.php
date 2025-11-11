@@ -5,6 +5,17 @@
   $metodo = $_SERVER['REQUEST_METHOD'];
   $modulo = $_GET['modulo'];
   $controller = null;
+  $link = mysql_connect('localhost', 'root', '');
+    if (!$link) {
+        die('Could not connect: ' . mysql_error());
+    }
+    echo 'Connected successfully';
+    mysql_close($link);
+    // make foo the current db
+    $db_selected = mysql_select_db('livraria', $link);
+    if (!$db_selected) {
+        die ('Can\'t use livraria : ' . mysql_error());
+    }
   // localhost/index.php?modulo=livro
   switch($modulo) {
     case "usuario":
