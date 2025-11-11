@@ -94,6 +94,7 @@ class Livro extends ClassePai {
     }
 
     static public function listar($filtroNome, $conn) {
+        /*
             $arquivo = fopen("database/livros.txt", "r");
             $retorno = [];
             while(!feof($arquivo)){
@@ -107,6 +108,24 @@ class Livro extends ClassePai {
                 
             }
             return $retorno;
+            */
+        $SQL = "SELECT * FROM livros WHERE titulo LIKE '%$filtroNome%'";
+        $resultado = $conn->query($SQL);
+        $retorno = [];
+        while($dados = $resultado->fetch_array()){
+            $livro = new Livro(
+                $dados['id'],
+                $dados['titulo'],
+                $dados['autor'],
+                $dados['editora'],
+                $dados['anoPublicacao'],
+                $dados['genero'],
+                $dados['localizacao'],
+                $dados['ISSN']
+            );
+            array_push($retorno, $livro);
+        }
+        return $retorno;
     }
 
     function montaLinhaDados()
