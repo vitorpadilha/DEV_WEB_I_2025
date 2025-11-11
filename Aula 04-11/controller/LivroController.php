@@ -4,7 +4,7 @@ require_once __DIR__ . "/../model/livro.class.php";
 class LivroController implements GenericController{
     private $conn;
     public function __construct($conn) {
-        $this->$conn = $conn;
+        $this->conn = $conn;
     }
     function cadastrar($dadosRecebidos){
         $livro = new Livro(
@@ -21,7 +21,7 @@ class LivroController implements GenericController{
     }
 
     function listar($dadosRecebidos){
-        return Livro::listar($dadosRecebidos);
+        return Livro::listar($dadosRecebidos, $this->conn);
     }
     function alterar($dadosRecebidos){
         $livro = LivroController::pegaPorId($dadosRecebidos->id, $this->conn);
@@ -32,11 +32,11 @@ class LivroController implements GenericController{
         $livro->genero = $dadosRecebidos["genero"];
         $livro->localizacao = $dadosRecebidos["localizacao"];
         $livro->ISSN = $dadosRecebidos["ISSN"];
-        $livro->alterar($this->$conn);
+        $livro->alterar($this->conn);
     }
     function remover($dadosRecebidos){
-       $livro = LivroController::pegaPorId($dadosRecebidos->id);
-       $livro->remover($this->$conn);
+       $livro = LivroController::pegaPorId($dadosRecebidos->id, $this->conn);
+       $livro->remover($this->conn);
     }
 }
 

@@ -93,7 +93,7 @@ class Livro extends ClassePai {
         $this->ISSN = $ISSN;
     }
 
-    static public function listar($filtroNome) {
+    static public function listar($filtroNome, $conn) {
             $arquivo = fopen("database/livros.txt", "r");
             $retorno = [];
             while(!feof($arquivo)){
