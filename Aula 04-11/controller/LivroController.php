@@ -32,7 +32,7 @@ class LivroController implements GenericController{
         $livro->genero = $dadosRecebidos["genero"];
         $livro->localizacao = $dadosRecebidos["localizacao"];
         $livro->ISSN = $dadosRecebidos["ISSN"];
-        $livro->alterar();
+        $livro->alterar($this->$conn);
     }
     function remover($dadosRecebidos){
        $livro = LivroController::pegaPorId($dadosRecebidos->id);
