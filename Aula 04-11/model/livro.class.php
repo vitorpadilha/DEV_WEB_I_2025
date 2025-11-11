@@ -23,7 +23,7 @@ class Livro extends ClassePai {
         );
     }
 
-    public function cadastrar(){
+    public function cadastrar($conn){
         $SQL = "INSERT INTO livros (titulo, autor, editora, anoPublicacao, genero, localizacao, ISSN) VALUES (
             '$this->titulo',
             '$this->autor',
@@ -33,13 +33,13 @@ class Livro extends ClassePai {
             '$this->localizacao',
             '$this->ISSN'
         )";
-        $resultado = mysql_query($SQL);
+        $resultado = $conn->query($SQL);
         if($resultado){
-            $this->id = mysql_insert_id();
+            $this->id = $conn->insert_id;
         }
     }
 
-    public function alterar(){
+    public function alterar($conn){
         $SQL = "UPDATE livros SET 
             titulo = '$this->titulo',
             autor = '$this->autor',
@@ -49,13 +49,13 @@ class Livro extends ClassePai {
             localizacao = '$this->localizacao',
             ISSN = '$this->ISSN'
         WHERE id = $this->id";
-        mysql_query($SQL);
+        $conn->query($SQL);
     }
-    static public function pegaPorId($id) {
+    static public function pegaPorId($id, $conn) {
         $SQL = "SELECT * FROM livros WHERE id = $id";
-        $resultado = mysql_query($SQL);
+        $resultado = $conn->mysql_query($SQL);
         if($resultado){
-            $dados = mysql_fetch_array($resultado);
+            $dados = $conn->fetch_array($resultado);
             return new Livro(
                 $dados['id'],
                 $dados['titulo'],
