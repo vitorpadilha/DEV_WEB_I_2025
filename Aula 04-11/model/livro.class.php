@@ -109,7 +109,7 @@ class Livro extends ClassePai {
             }
             return $retorno;
             */
-        $SQL = "SELECT * FROM livros WHERE titulo LIKE '%$filtroNome%'";
+        $SQL = "SELECT * FROM livros WHERE titulo LIKE '%".$filtroNome["filtro"]."%'";
         $resultado = $conn->query($SQL);
         $retorno = [];
         while($dados = $resultado->fetch_array()){

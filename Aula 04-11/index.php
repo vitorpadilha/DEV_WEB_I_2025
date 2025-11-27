@@ -29,6 +29,9 @@ header("Access-Control-Max-Age: 86400");
         echo json_encode(["erro"=>false, "mensagem"=> "Cadastrado com sucesso!"]);
         exit;
     case "GET":
+        if(isset($_GET) && $_GET["filtro"]) {
+            $dadosRecebidos["filtro"] = $_GET["filtro"];
+        }
         echo json_encode($controller->listar($dadosRecebidos));
         exit;
     case "PUT":
