@@ -40,4 +40,4 @@ class LivroController implements GenericController{
     }
 }
 
-?>:
+?>
