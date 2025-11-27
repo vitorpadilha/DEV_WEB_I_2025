@@ -20,18 +20,18 @@ class LivroController implements GenericController{
         $livro->cadastrar($this->conn);
     }
 
-    function listar($dadosRecebidos){
-        return Livro::listar($dadosRecebidos, $this->conn);
+    function listar($filtro){
+        return Livro::listar($filtro, $this->conn);
     }
     function alterar($dadosRecebidos){
         $livro = Livro::pegaPorId($dadosRecebidos->id, $this->conn);
-        $livro->titulo = $dadosRecebidos["titulo"];
-        $livro->autor = $dadosRecebidos["autor"];
-        $livro->editora = $dadosRecebidos["editora"];
-        $livro->anoPublicacao = $dadosRecebidos["anoPublicacao"];
-        $livro->genero = $dadosRecebidos["genero"];
-        $livro->localizacao = $dadosRecebidos["localizacao"];
-        $livro->ISSN = $dadosRecebidos["ISSN"];
+        $livro->titulo =  $dadosRecebidos->titulo;
+        $livro->autor =  $dadosRecebidos->autor;
+        $livro->editora = $dadosRecebidos->editora;
+        $livro->anoPublicacao = $dadosRecebidos->anoPublicacao;
+        $livro->genero = $dadosRecebidos->genero;
+        $livro->localizacao = $dadosRecebidos->localizacao;
+        $livro->ISSN = $dadosRecebidos->ISSN;
         $livro->alterar($this->conn);
     }
     function remover($dadosRecebidos){

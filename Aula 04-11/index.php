@@ -29,10 +29,12 @@ header("Access-Control-Max-Age: 86400");
         echo json_encode(["erro"=>false, "mensagem"=> "Cadastrado com sucesso!"]);
         exit;
     case "GET":
+        //Para passar o filtro para o método get é preciso passar pela URL. EX: http://localhost/front/index.php?modulo=livro&filtro=Harry Porter
+        $filtro = "";
         if(isset($_GET) && $_GET["filtro"]) {
-            $dadosRecebidos["filtro"] = $_GET["filtro"];
+            $filtro = $_GET["filtro"];
         }
-        echo json_encode($controller->listar($dadosRecebidos));
+        echo json_encode($controller->listar($filtro));
         exit;
     case "PUT":
         echo json_encode($controller->alterar($dadosRecebidos));

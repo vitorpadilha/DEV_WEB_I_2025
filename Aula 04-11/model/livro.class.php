@@ -94,21 +94,7 @@ class Livro extends ClassePai {
     }
 
     static public function listar($filtroNome, $conn) {
-        /*
-            $arquivo = fopen("database/livros.txt", "r");
-            $retorno = [];
-            while(!feof($arquivo)){
-                $linha = fgets($arquivo);
-                if(empty($linha))
-                    continue;
-                $dados = explode(self::SEPARADOR, $linha);
-                if(str_contains($dados[1], $filtroNome)){
-                    array_push($retorno,$this->toEntity($dados));
-                }
-                
-            }
-            return $retorno;
-            */
+       
         $SQL = "SELECT * FROM livros WHERE titulo LIKE '%".$filtroNome["filtro"]."%'";
         $resultado = $conn->query($SQL);
         $retorno = [];
